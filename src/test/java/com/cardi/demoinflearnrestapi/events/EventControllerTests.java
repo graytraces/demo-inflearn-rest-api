@@ -1,5 +1,6 @@
 package com.cardi.demoinflearnrestapi.events;
 
+import com.cardi.demoinflearnrestapi.common.TestDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class EventControllerTests {
     ObjectMapper objectMapper;
 
     @Test
+    @TestDescription("정상적으로 값을 생성하는 테스트")
     public void createEvent() throws Exception {
         EventDto event = EventDto.builder()
                 .name("Spring")
@@ -38,7 +40,7 @@ public class EventControllerTests {
                 .beginEnrollmentDateTime(LocalDateTime.of(2018, 11, 22, 11, 22, 33))
                 .closeEnrollmentDateTime(LocalDateTime.of(2018, 11, 30, 11, 22, 33))
                 .beginEventDateTime(LocalDateTime.of(2018, 11, 22, 11, 22, 33))
-                .endEventDateTime(LocalDateTime.of(2018, 11, 22, 11, 22, 33))
+                .endEventDateTime(LocalDateTime.of(2018, 11, 30, 11, 22, 33))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
@@ -60,6 +62,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력받을수 없는 값을 파라미터로 쓰는 경우")
     public void createEvent_BadRequest() throws Exception {
         Event event = Event.builder()
                 .id(100)
@@ -86,6 +89,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력값이 비어있는 경우")
     public void createEvent_Bad_Request_Empty_Input() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
@@ -97,6 +101,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력값이 허용되지 않는 경우")
     public void createEvent_Bad_Request_Wrong_Input() throws Exception {
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
